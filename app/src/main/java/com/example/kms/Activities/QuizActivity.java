@@ -36,10 +36,13 @@ public class QuizActivity extends AppCompatActivity {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
 
-            ft.add(binding.pictureFragment.getId(), new ImageFragment());
-            ft.add(binding.buttonFragment.getId(), new ButtonFragment());
-            ft.add(binding.scoreFragment.getId(), new ScoreFragment());
+            ImageFragment pictureFragment = new ImageFragment();
+            ButtonFragment buttonFragment = new ButtonFragment();
+            ScoreFragment scoreFragment = new ScoreFragment();
 
+            ft.add(binding.pictureFragment.getId(), pictureFragment);
+            ft.add(binding.buttonFragment.getId(), buttonFragment);
+            ft.add(binding.scoreFragment.getId(), scoreFragment);
             ft.commit();
         }
     }

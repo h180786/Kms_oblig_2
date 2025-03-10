@@ -39,22 +39,42 @@ public class QuizViewModel extends AndroidViewModel {
     }
 
 
-    public QuizViewModel(Application application, SavedStateHandle savedStateHandle, LiveData<List<Quiz>> allQuizzes, QuizRepository repository) {
+    public QuizViewModel(@NonNull Application application) {
         super(application);
-
-        this.handle = savedStateHandle;
-        repository = new QuizRepository(application);
-        allQuestions = repository.getAllQuestions();
-
-        galleryQuestions = Transformations.switchMap(allQuizzes, quizzes -> {
+        this.handle = new SavedStateHandle();
+        this.repository = new QuizRepository(application);
+        this.allQuestions = repository.getAllQuestions();
+        this.galleryQuestions = Transformations.switchMap(allQuestions, quizzes -> {
             if (quizzes != null && !quizzes.isEmpty()) {
                 List<Quiz> shuffledList = new ArrayList<>(quizzes);
                 _allQuestions.setValue(shuffledList);
             }
             return _allQuestions;
         });
+        this.shuffledQuizzes = Transformations.switchMap(allQuestions, quizzes -> {
+            if (quizzes != null && !quizzes.isEmpty()) {
+                List<Quiz> shuffledList = new ArrayList<>(quizzes);
+                Collections.shuffle(shuffledList);
+                _shuffledQuizzes.setValue(shuffledList);
+            }
+            return _shuffledQuizzes;
+        });
+    }
 
-        shuffledQuizzes = Transformations.switchMap(allQuizzes, quizzes -> {
+    // Existing constructor
+    public QuizViewModel(Application application, SavedStateHandle savedStateHandle, LiveData<List<Quiz>> allQuizzes, QuizRepository repository) {
+        super(application);
+        this.handle = savedStateHandle;
+        this.repository = repository;
+        this.allQuestions = repository.getAllQuestions();
+        this.galleryQuestions = Transformations.switchMap(allQuizzes, quizzes -> {
+            if (quizzes != null && !quizzes.isEmpty()) {
+                List<Quiz> shuffledList = new ArrayList<>(quizzes);
+                _allQuestions.setValue(shuffledList);
+            }
+            return _allQuestions;
+        });
+        this.shuffledQuizzes = Transformations.switchMap(allQuizzes, quizzes -> {
             if (quizzes != null && !quizzes.isEmpty()) {
                 List<Quiz> shuffledList = new ArrayList<>(quizzes);
                 Collections.shuffle(shuffledList);

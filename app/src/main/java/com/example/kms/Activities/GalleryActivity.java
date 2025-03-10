@@ -67,6 +67,7 @@ public class GalleryActivity extends AppCompatActivity implements RecyclerViewIn
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 Intent data = result.getData();
+                assert data != null;
                 Uri imageUri = data.getData();
 
                 if (imageUri != null) {

@@ -11,7 +11,7 @@ public abstract class QuizRoomDatabase extends RoomDatabase {
 
     public abstract QuizDao quizDao();
 
-    private static QuizRoomDatabase INSTANCE;
+    private static volatile QuizRoomDatabase INSTANCE;
 
     static QuizRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {

@@ -49,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         ImageButton deleteButton;
-        TextView name, wrongAnswer1, wrongAnswer2;
+        TextView name;
 
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);

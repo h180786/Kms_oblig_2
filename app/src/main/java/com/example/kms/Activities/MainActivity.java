@@ -2,6 +2,7 @@ package com.example.kms.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -22,10 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
+        Log.d("picture", String.valueOf(R.drawable.kitten));
+        Log.d("picture", String.valueOf(R.drawable.duck));
+        Log.d("picture", String.valueOf(R.drawable.puppy));
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
-        setContentView(R.layout.activity_main);
+        setContentView(view);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

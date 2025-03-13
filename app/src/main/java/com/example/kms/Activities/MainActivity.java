@@ -2,7 +2,6 @@ package com.example.kms.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -22,10 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
-        Log.d("picture", String.valueOf(R.drawable.kitten));
-        Log.d("picture", String.valueOf(R.drawable.duck));
-        Log.d("picture", String.valueOf(R.drawable.puppy));
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();

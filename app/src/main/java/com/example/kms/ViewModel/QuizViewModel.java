@@ -121,24 +121,30 @@ public class QuizViewModel extends AndroidViewModel {
         return totalTries;
     }
 
-    public ArrayList<String> getAnswers(){
-        if(!shuffledAnswers) {
-            ArrayList<String> answers = new ArrayList<>(Arrays.asList(
-                    Objects.requireNonNull(
-                            shuffledQuizzes.getValue()).get(0).getAnswer()
-            ));
+    private final List<String> randomNames = Arrays.asList("Kitten", "Puppy", "Calf", "Foal", "Cub", "Chick", "Fawn", "Gosling", "Piglet", "Lamb");
+
+    public ArrayList<String> getAnswers() {
+        if (!shuffledAnswers) {
+            Quiz currentQuiz = Objects.requireNonNull(shuffledQuizzes.getValue()).get(0);
+            String correctAnswer = currentQuiz.getAnswer();
+            ArrayList<String> answers = new ArrayList<>(randomNames);
+            answers.remove(correctAnswer); // Remove correct answer if it exists in random names
             Collections.shuffle(answers);
+            answers = new ArrayList<>(answers.subList(0, 2)); // Pick 2 random names
+            answers.add(correctAnswer); // Add the correct answer
+            Collections.shuffle(answers); // Shuffle to randomize the position of the correct answer
             shuffledAnswers = true;
             this.answers = answers;
         }
         return answers;
     }
 
-    public void goToNextQuiz(){
+    public void goToNextQuiz() {
         List<Quiz> newQuiz = shuffledQuizzes.getValue();
         assert newQuiz != null;
         newQuiz.remove(0);
         _shuffledQuizzes.setValue(newQuiz);
+        shuffledAnswers = false;
     }
 
     public void incrementScore() {

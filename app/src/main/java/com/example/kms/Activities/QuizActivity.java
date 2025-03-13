@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.kms.Fragments.ButtonFragment;
 import com.example.kms.Fragments.ImageFragment;
+import com.example.kms.Fragments.ResultFragment;
 import com.example.kms.Fragments.ScoreFragment;
 import com.example.kms.databinding.ActivityQuizBinding;
 
@@ -47,21 +48,21 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-//    public void getResultScreen() {
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//
-//        ScoreFragment scoreFragment = (ScoreFragment) fm.findFragmentById(binding.scoreFragment.getId());
-//        ButtonFragment buttonFragment = (ButtonFragment) fm.findFragmentById(binding.buttonFragment.getId());
-//        ImageFragment pictureFragment = (ImageFragment) fm.findFragmentById(binding.pictureFragment.getId());
-//        ResultFragment resultFragment = new ResultFragment();
-//
-//        if (pictureFragment != null && buttonFragment != null && scoreFragment != null) {
-//            ft.remove(pictureFragment);
-//            ft.remove(buttonFragment);
-//            ft.remove(scoreFragment);
-//            ft.add(binding.resultFragment.getId(), resultFragment);
-//            ft.commit();
-//        }
-//    }
+    public void getResultScreen() {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        ScoreFragment scoreFragment = (ScoreFragment) fm.findFragmentById(binding.scoreFragment.getId());
+        ButtonFragment buttonFragment = (ButtonFragment) fm.findFragmentById(binding.buttonFragment.getId());
+        ImageFragment pictureFragment = (ImageFragment) fm.findFragmentById(binding.pictureFragment.getId());
+        ResultFragment resultFragment = new ResultFragment();
+
+        if (pictureFragment != null && buttonFragment != null && scoreFragment != null) {
+            ft.remove(pictureFragment);
+            ft.remove(buttonFragment);
+            ft.remove(scoreFragment);
+            ft.add(binding.resultFragment.getId(), resultFragment);
+            ft.commit();
+        }
+    }
 }

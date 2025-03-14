@@ -51,10 +51,12 @@ public class ButtonFragment extends Fragment {
 
         View.OnClickListener answerButtonClickListener = v -> {
             String chosenAnswer = ((Button) v).getText().toString();
+            v.setClickable(false);
             if (chosenAnswer.equals(correctAnswer)) {
 
                 viewModel.incrementScore();
                 viewModel.incrementTotalTries();
+
 
                 Toast.makeText(getContext(), "Correct!", Toast.LENGTH_SHORT).show();
                 if (viewModel.getShuffledQuizzes().getValue().size() == 1) {
@@ -70,7 +72,7 @@ public class ButtonFragment extends Fragment {
                 viewModel.saveButtonColor(String.valueOf(v.getId()), wrongColor);
                 viewModel.incrementTotalTries();
             }
-            v.setClickable(false);
+
         };
 
         binding.button1.setOnClickListener(answerButtonClickListener);

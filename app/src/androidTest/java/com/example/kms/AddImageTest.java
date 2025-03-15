@@ -1,26 +1,29 @@
 package com.example.kms;
+
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.intent.Intents.init;
+import static androidx.test.espresso.intent.Intents.intending;
 import static androidx.test.espresso.intent.Intents.release;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 import static com.example.kms.RecyclerViewItemCountAssertion.withItemCount;
 
-import android.os.SystemClock;
-import android.view.View;
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Intent;
+import android.net.Uri;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.test.espresso.UiController;
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.kms.Activities.GalleryActivity;
 import com.example.kms.RecyclerView.RecyclerViewAdapter;
 
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,7 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class GalleryActivityTest {
+public class AddImageTest {
 
     @Rule
     public ActivityScenarioRule<GalleryActivity> activityRule =
@@ -39,6 +42,7 @@ public class GalleryActivityTest {
 
     @Before
     public void startTest() {
+        GalleryActivity.setTesting(true);
         init();
         activityRule.getScenario().onActivity(activity -> {
             adapter = (RecyclerViewAdapter) ((RecyclerView) activity.findViewById(R.id.recyclerView)).getAdapter();
@@ -47,36 +51,27 @@ public class GalleryActivityTest {
     }
 
     @Test
-    public void deleteImage() {
-        onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.
-                actionOnItemAtPosition(0, clickChildViewWithId(R.id.deleteButton)));
-        SystemClock.sleep(1000);
-        onView(withId(R.id.recyclerView)).check(withItemCount(itemCount-1));
+    public void addQuizTest() {
+
+        Intent resultData = new Intent();
+        Uri imageUri = Uri.parse("content://media/external/images/media/1");
+        resultData.setData(imageUri);
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
+
+        intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(result);
+
+        onView(withId(R.id.galleryButton)).perform(click());
+        onView(withId(R.id.correctAnswer)).perform(click()).perform(typeText("Test"), closeSoftKeyboard());
+
+
+        onView(withId(R.id.submitButton)).perform(click());
+
+        onView(withId(R.id.recyclerView)).check(withItemCount(itemCount+1));
     }
 
     @After
-    public void endTest() {
+    public void endTest(){
         release();
     }
 
-    private static ViewAction clickChildViewWithId(final int id) {
-        return new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return isDisplayed();
-            }
-
-            @Override
-            public String getDescription() {
-                return "Click on a child view with specified id.";
-            }
-
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                View v = view.findViewById(id);
-                v.performClick();
-            }
-        };
-    }
 }

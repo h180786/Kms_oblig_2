@@ -26,6 +26,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.quizModels = quizModels;
         this.recyclerViewInterface = recyclerViewInterface;
     }
+
+
     @NonNull
     @Override
     public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

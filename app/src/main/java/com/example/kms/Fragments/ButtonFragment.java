@@ -63,7 +63,7 @@ public class ButtonFragment extends Fragment {
                     ((QuizActivity) getActivity()).getResultScreen();
                 } else {
                     viewModel.goToNextQuiz();
-                    updateButtons(viewModel.getShuffledQuizzes().getValue().get(0)); // Update buttons for the next quiz
+                    updateButtons(viewModel.getShuffledQuizzes().getValue().get(0));
                 }
 
             } else {

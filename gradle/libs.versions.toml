@@ -11,6 +11,8 @@ roomCommon = "2.6.1"
 roomRuntime = "2.6.1"
 roomCompiler = "2.6.1"
 espressoIdlingResource = "3.6.1"
+espressoIntents = "3.6.1"
+espressoContrib = "3.6.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -24,6 +26,8 @@ room-common = { group = "androidx.room", name = "room-common", version.ref = "ro
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntime" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espressoIdlingResource" }
+espresso-intents = { group = "androidx.test.espresso", name = "espresso-intents", version.ref = "espressoIntents" }
+espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

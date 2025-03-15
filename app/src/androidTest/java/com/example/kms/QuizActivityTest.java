@@ -36,22 +36,15 @@ public class QuizActivityTest {
     }
 
     @Test
-    public void testScore1(){
+    public void testScore(){
+        onView(withTagValue(equalTo("Wrong answer 1"))).perform(click());
+        onView(withTagValue(equalTo("Right answer"))).perform(click());
+        onView(withTagValue(equalTo("Wrong answer 2"))).perform(click());
         onView(withTagValue(equalTo("Wrong answer 1"))).perform(click());
         onView(withTagValue(equalTo("Right answer"))).perform(click());
 
-        onView(withId(R.id.score)).check(matches(withText("1")));
-        onView(withId(R.id.totalScore)).check(matches(withText("2")));
-    }
-
-    @Test
-    public void testScore2(){
-        onView(withTagValue(equalTo("Wrong answer 2"))).perform(click());
-        onView(withTagValue(equalTo("Right answer"))).perform(click());
-        onView(withTagValue(equalTo("Right answer"))).perform(click());
-
         onView(withId(R.id.score)).check(matches(withText("2")));
-        onView(withId(R.id.totalScore)).check(matches(withText("3")));
+        onView(withId(R.id.totalScore)).check(matches(withText("5")));
     }
 
     @After

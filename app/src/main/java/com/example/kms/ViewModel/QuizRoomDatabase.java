@@ -21,7 +21,7 @@ public abstract class QuizRoomDatabase extends RoomDatabase {
                                     context.getApplicationContext(),
                                     QuizRoomDatabase.class, "quiz_database"
                             )
-                            .createFromAsset("database/quiz.db")
+                            .createFromAsset("database/quizMap.db")
                             .build();
                 }
             }

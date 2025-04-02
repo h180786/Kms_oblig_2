@@ -57,7 +57,7 @@ public class NewImageActivity extends AppCompatActivity {
 
         if (!(rightAnswer.isEmpty()))
         {
-            Quiz newQuiz= new Quiz(image, rightAnswer);
+            Quiz newQuiz= new Quiz(image, rightAnswer, 0, 0);
             viewModel.insertQuiz(newQuiz);
             finish();
         }

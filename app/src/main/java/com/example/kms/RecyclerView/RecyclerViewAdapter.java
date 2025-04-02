@@ -1,6 +1,7 @@
 package com.example.kms.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kms.Activities.MapsActivity;
 import com.example.kms.R;
 import com.example.kms.ViewModel.Quiz;
 
@@ -39,8 +41,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.imageView.setImageURI(Uri.parse(quizModels.get(position).getPicture()));
-        holder.name.setText(quizModels.get(position).getAnswer());
+        Quiz quiz = quizModels.get(position);
+        holder.imageView.setImageURI(Uri.parse(quiz.getPicture()));
+        holder.name.setText(quiz.getAnswer());
+
+        holder.mapsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, MapsActivity.class);
+            intent.putExtra("latitude", quiz.getLat());
+            intent.putExtra("longitude", quiz.getLng());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -49,6 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView mapsButton;
         ImageView imageView;
         ImageButton deleteButton;
         TextView name;
@@ -59,6 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageView = itemView.findViewById(R.id.picture);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             name = itemView.findViewById(R.id.Name);
+            mapsButton = itemView.findViewById(R.id.mapsButton); // Ensure this ID matches your layout
 
             deleteButton.setOnClickListener(v -> {
                 if (recyclerViewInterface != null) {
@@ -66,9 +78,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     if (pos != RecyclerView.NO_POSITION) {
                         recyclerViewInterface.deleteQuiz(pos);
                     }
-
-
                 }
             });
-        }}
+        }
+    }
 }

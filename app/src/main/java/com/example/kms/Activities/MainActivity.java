@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        Log.d("Uri troll", String.valueOf((R.drawable.troll)));
+        Log.d("Uri quetz", String.valueOf((R.drawable.quetz)));
+        Log.d("Uri kappa", String.valueOf((R.drawable.kappa)));
         setContentView(view);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

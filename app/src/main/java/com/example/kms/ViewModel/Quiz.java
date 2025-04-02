@@ -16,9 +16,18 @@ public class Quiz {
     @ColumnInfo(name = "answer")
     private String answer;
 
-    public Quiz(@NonNull String picture, String answer){
+    @ColumnInfo(name = "lat")
+    private float lat;
+
+    @ColumnInfo(name = "long")
+    private float lng;
+
+    public Quiz(@NonNull String picture, String answer, float lat, float lng) {
         this.picture = picture;
         this.answer = answer;
+        this.lat = lat;
+        this.lng = lng;
+
     }
 
     @NonNull
@@ -27,5 +36,12 @@ public class Quiz {
     }
     public String getAnswer() {
         return answer;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+    public float getLng() {
+        return lng;
     }
 }

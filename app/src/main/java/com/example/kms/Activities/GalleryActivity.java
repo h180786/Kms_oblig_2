@@ -90,7 +90,7 @@ public class GalleryActivity extends AppCompatActivity implements RecyclerViewIn
         binding.sortZAButton.setOnClickListener(v -> viewModel.sortZtoA());
         binding.galleryButton.setOnClickListener(v -> openPhoneGallery());
         binding.cameraButton.setOnClickListener(v -> openCamera());
-    }
+        }
 
     @Override
     public void deleteQuiz(int pos) {
